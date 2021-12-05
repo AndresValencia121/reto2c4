@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Reto2_Web.controlador;
+
 import Reto2_Web.servicio.UserService;
 import Reto2_Web.modelo.User;
 import java.util.List;
@@ -22,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author USUARIO
+ * @author Andres Valencia Trujillo
  */
 @RestController
 @RequestMapping("/api/user")
@@ -30,33 +28,66 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     
      @Autowired
-    private UserService userService;
+    /**
+     * Atributo de tipo UserService
+     */
+     private UserService userService;
      
      @GetMapping("/all")
-    public List<User> getAll() {
+    /**
+     * Metodo que lista todos los usuarios registrados en la DB
+     * @return todos los usuarios
+     */
+     public List<User> getAll() {
         return userService.getAll();
     }
       @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
+    /**
+     * Metodo que crea un usuario
+     * @param user
+     * @return el usuario creado
+     */
     public User create(@RequestBody User user) {
         return userService.create(user);
     }
     
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
+    /**
+     * Metodo que actualiza un registro de usuario en la DB
+     * @param user
+     * @return el usuario actualizado
+     */
     public User update(@RequestBody User user) {
         return userService.update(user);
     }
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    /**
+     * Metodo que borra un usuario de la DB
+     * @param id
+     * @return el usuario borrado
+     */
     public boolean delete(@PathVariable("id") int id) {
         return userService.delete(id);
     }
     @GetMapping("/{email}/{password}")
+    /**
+     * Metodo que autentica un usuario mediante su email
+     * @param email
+     * @param password
+     * @return confirmacion de autenticación
+     */
     public User authenticateUser(@PathVariable("email") String email, @PathVariable("password") String password) {
         return userService.authenticateUser(email, password);
     }
-      @GetMapping("/emailexist/{email}")
+    @GetMapping("/emailexist/{email}")
+    /**
+     * Metodo que verifica si un email existe en la DB
+     * @param email
+     * @return
+     */
     public boolean emailExists(@PathVariable("email") String email) {
         return userService.emailExists(email);
     }

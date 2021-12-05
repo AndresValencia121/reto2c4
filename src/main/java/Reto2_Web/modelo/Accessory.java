@@ -23,7 +23,6 @@ public class Accessory {
     private String reference;
     private String brand;
     private String category;
-    //private String objetivo;
     private String material;
     private String gender;
     private String size;
